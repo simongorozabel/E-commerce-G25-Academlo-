@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Quicksand:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>E-commerce G25</title>
+  </head>
+  <body>
+    <nav>
+      <img src="./img/logo_nombre.png" alt="Academlo" />
+      <button class="car__toggle">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </button>
+      <!-- Panel Carrito de Compras -->
+      <div class="car__block" id="car">
+        <div id="car__list"></div>
+      </div>
+    </nav>
+    <header>
+      <img src="./img/logo blanco.png" alt="Logo Academlo" />
+    </header>
+    <main>
+      <h3>Todos nuestros productos</h3>
+      <!-- Lista de productos -->
+      <div id="products-container" class="principal__container"></div>
+    </main>
+  </body>
+  <script
+    src="https://kit.fontawesome.com/b8ac5e7db4.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./main.js"></script>
+</html>
