@@ -11,6 +11,10 @@ const carList = document.querySelector("#car__list");
 const emptyButton = document.querySelector(".empty__button");
 // Necesito tener un array que reciba los elementos que debo introducir en el carrito de compras.
 let carProducts = [];
+// modalContainer
+const modalContainer = document.querySelector("#modal-container");
+const modalElement = document.querySelector("#modal");
+let modalDetails = [];
 
 // Lógica para mostrar y ocultar el carrito
 carToggle.addEventListener("click", () => {
@@ -29,10 +33,14 @@ function enventListenersLoader() {
   //Cuando se precio EMPTY CARt
   emptyButton.addEventListener("click", emptyCar);
   // Se ejecuta  cuando se carga la página
-  document.addEventListener('DOMContentLoaded', ()=>{
-    carProducts = JSON.parse(localStorage.getItem('cart')) || [];
-    carElementsHTML()
-  })
+  document.addEventListener("DOMContentLoaded", () => {
+    carProducts = JSON.parse(localStorage.getItem("cart")) || [];
+    carElementsHTML();
+  });
+  // Cuando se presione el botón View Details
+  productsList.addEventListener("click", modalProduct);
+  //Cuando se de click al botón para cerrar Modal
+  modalContainer.addEventListener("click", closeModal);
 }
 
 function getProducts() {
@@ -74,7 +82,7 @@ function printProducts(products) {
     <p>⭐⭐⭐⭐⭐</p>
     </div>
     <div class="product__container__details" >
-      <button>Product Details</button>
+      <button class="product__details" >Product Details</button>
     </div>
     </div>
     `;
@@ -166,12 +174,12 @@ function carElementsHTML() {
     // appendChild permite insertar elementos al DOM, muy similar a innerHTML
     carList.appendChild(div);
   });
-  productsStorage()
+  productsStorage();
 }
 
 // Local Storage
 function productsStorage() {
-  localStorage.setItem('cart', JSON.stringify(carProducts))
+  localStorage.setItem("cart", JSON.stringify(carProducts));
 }
 
 // Eliminar productos del carrito
@@ -190,6 +198,73 @@ function emptyCar() {
 }
 
 // Ventana Modal
+// (1)---------------------------
+function modalProduct(event) {
+  if (event.target.classList.contains("product__details")) {
+    modalContainer.classList.add("show__modal");
+    const product = event.target.parentElement.parentElement;
+    //  console.log(product)
+    modalDetailsElement(product);
+  }
+}
+
+function closeModal(event) {
+  if (event.target.classList.contains("icon__modal")) {
+    modalContainer.classList.remove("show__modal");
+    modalElement.innerHTML = "";
+    modalDetails = [];
+  }
+}
+
+function modalDetailsElement(product) {
+  const infoDetails = [
+    {
+      id: product.querySelector("button").getAttribute("data-id"),
+      image: product.querySelector("img").src,
+      name: product.querySelector(".product__container__name p").textContent,
+      price: product.querySelector(".product__container__price p").textContent,
+    },
+  ];
+  modalDetails = [...infoDetails];
+  // console.log(modalDetails)
+  modalElementsHTML();
+}
+
+function modalElementsHTML() {
+  modalElement.innerHTML = "";
+
+  modalDetails.forEach((product) => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+        <div class="modal__product">
+          <div class="modal__product__description">
+            <p>${product.name}</p>
+            <p>${product.price}</p>
+          </div>
+          <div class="modal__product__image">
+            <img src="${product.image}">
+          </div>
+          <p>Sizes:</p>
+          <div class="modal__product__sizes">
+            <button>S</button>
+            <button>M</button>
+            <button>L</button>
+            <button>XL</button>
+            <button>2XL</button>
+            <button>3XL</button>
+          </div>
+          <div class="modal__add__to__cart" >
+          <button id="add__to__cart" data-id="${product.id}">Add to Car</button>
+          </div>
+        </div>
+          <div class="modal__image__design" >
+            <img src="${product.image}">
+          </div>
+    `;
+
+    modalElement.appendChild(div);
+  });
+}
 
 // Local Storage
 // Podemos guardar información en local storage
