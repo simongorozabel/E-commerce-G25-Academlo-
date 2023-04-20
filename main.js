@@ -8,6 +8,7 @@ const productsList = document.querySelector("#products-container");
 // Carrito de compras
 const car = document.querySelector("#car");
 const carList = document.querySelector("#car__list");
+const emptyButton = document.querySelector(".empty__button");
 // Necesito tener un array que reciba los elementos que debo introducir en el carrito de compras.
 let carProducts = [];
 
@@ -23,6 +24,15 @@ enventListenersLoader();
 function enventListenersLoader() {
   // Cuando se presione el botón "Add to car"
   productsList.addEventListener("click", addProduct);
+  // Cuando se presione el botón DELETE del carrito de compras
+  car.addEventListener("click", deleteProducts);
+  //Cuando se precio EMPTY CARt
+  emptyButton.addEventListener("click", emptyCar);
+  // Se ejecuta  cuando se carga la página
+  document.addEventListener('DOMContentLoaded', ()=>{
+    carProducts = JSON.parse(localStorage.getItem('cart')) || [];
+    carElementsHTML()
+  })
 }
 
 function getProducts() {
@@ -56,6 +66,15 @@ function printProducts(products) {
       <button class="car___button add__to__car" id="add__to__cart" data-id="${
         products[i].id
       }">Add to Car</button>
+      <span>stock:</span><button class="car___button">${
+        products[i].quantity
+      }</button>
+    </div>
+    <div class="product__container__rating">
+    <p>⭐⭐⭐⭐⭐</p>
+    </div>
+    <div class="product__container__details" >
+      <button>Product Details</button>
     </div>
     </div>
     `;
@@ -78,7 +97,7 @@ function addProduct(event) {
     //.contains valida si el elemento existe dentro de la clase
     const product = event.target.parentElement.parentElement;
     // parentElement nos ayuda a acceder al padre inmediatamente superior del elemento.
-    
+
     carProductsElements(product);
   }
 }
@@ -138,7 +157,7 @@ function carElementsHTML() {
         </div>
         <div class="car__product__button">
           <button class="delete__product" data-id="${product.id}">
-            Delete
+            X
           </button>
         </div>
       </div>
@@ -147,49 +166,42 @@ function carElementsHTML() {
     // appendChild permite insertar elementos al DOM, muy similar a innerHTML
     carList.appendChild(div);
   });
+  productsStorage()
 }
 
-/* ...Spread...
-   El spread puede ser usado para combinar arrays.
+// Local Storage
+function productsStorage() {
+  localStorage.setItem('cart', JSON.stringify(carProducts))
+}
 
-   const arr1 = [1, 2, 3]
-   const arr2 = [4, 5, 6]
+// Eliminar productos del carrito
 
-   const spreadOperatorExample = [...arr1, ...arr2]
-   console.log(spreadOperatorExample)
-    result: [1, 2, 3, 4, 5, 6]
+function deleteProducts(event) {
+  if (event.target.classList.contains("delete__product")) {
+    const productID = event.target.getAttribute("data-id");
+    carProducts = carProducts.filter((product) => product.id !== productID);
+    carElementsHTML();
+  }
+}
+// Vacias el carrito completo
+function emptyCar() {
+  carProducts = [];
+  carElementsHTML();
+}
 
-   Métodos para array:
-    -forEach((element)=>{function})
-      { Itera sobre cada elemento de un arreglo. }
+// Ventana Modal
 
-  const vocales = ['a','e','i','o','u']
+// Local Storage
+// Podemos guardar información en local storage
+// localStorage.setItem("apellido", "Gorozabel");
 
-  const abc = vocales.forEach(element => console.log(element))
-    result: a
-            e
-            i
-            o
-            u
-  
-    -.find
-      { Busca dentro del array y retorna el primer elemento que encuentra con la condición especificada. }
-    
-    const nums = [5,12,8,130,44,8]
+// console.log(localStorage.getItem("apellido"))
 
-    const result = nums.find(num => num === 8)
-    console.log(result)
-      result: 8
+// const usuario = {
+//   name: 'Simon',
+//   age:21
+// }
+// localStorage.setItem("usuario", JSON.stringify(usuario))
 
-    const filterNum = nums.filter(num => num === 8)
-    console.log(filterNum)
-      result: [8, 8, 8]
-
-    -.map
-      { Es una forma de iterar, pero retorna una copia del arreglo con los resultados aplicados. }
-
-    const dobles = nums.map(num => num*2)
-    console.log(dobles)
-      result: [10,24,16,260,88,16,16]
-
-*/
+// const usuarioLocal = localStorage.getItem("usuario")
+// console.log(JSON.parse(usuarioLocal))
