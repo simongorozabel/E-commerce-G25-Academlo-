@@ -5,7 +5,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: "Oswald", sans-serif;
 }
@@ -121,7 +120,7 @@ main h3 {
   justify-content: center;
   margin-bottom: 10px;
 }
-.product__container__details{
+.product__container__details {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
@@ -134,9 +133,8 @@ main h3 {
   color: #274671;
   border: solid 1 px #274671;
 }
-.product__container__details button:hover{
+.product__container__details button:hover {
   transform: translateY(-4px);
-  
 }
 .car___button {
   background-color: #eb4a5a;
@@ -217,7 +215,7 @@ main h3 {
   background-color: white;
   width: 90%;
   height: 87%;
-  position:fixed;
+  position: fixed;
   top: 12%;
   left: 5%;
   box-shadow: 0px 12px 20px 8px #434343;
@@ -238,10 +236,10 @@ main h3 {
   transition: 0.5s;
   cursor: pointer;
 }
-.modal__container__element div i:hover{
+.modal__container__element div i:hover {
   transform: rotate(90deg);
 }
-.modal__container__element div:nth-child(2){
+.modal__container__element div:nth-child(2) {
   display: flex;
   justify-content: flex-start;
 }
@@ -266,7 +264,7 @@ main h3 {
   font-weight: bold;
 }
 .modal__product__image img {
-  width:30%;
+  width: 30%;
   position: relative;
   left: 30px;
 }
@@ -339,7 +337,7 @@ main h3 {
     left: 30%;
   }
   .modal__product__image img {
-    width:100%;
+    width: 100%;
     left: 0px;
   }
   .modal__image__design {
@@ -348,7 +346,7 @@ main h3 {
   .modal__image__design img {
     display: none;
   }
-  .modal__add__to__cart button{
+  .modal__add__to__cart button {
     width: 200px;
   }
 }
