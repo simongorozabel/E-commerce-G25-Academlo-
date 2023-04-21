@@ -265,18 +265,3 @@ function modalElementsHTML() {
     modalElement.appendChild(div);
   });
 }
-
-// Local Storage
-// Podemos guardar información en local storage
-// localStorage.setItem("apellido", "Gorozabel");
-
-// console.log(localStorage.getItem("apellido"))
-
-// const usuario = {
-//   name: 'Simon',
-//   age:21
-// }
-// localStorage.setItem("usuario", JSON.stringify(usuario))
-
-// const usuarioLocal = localStorage.getItem("usuario")
-// console.log(JSON.parse(usuarioLocal))
