@@ -64,6 +64,10 @@ header img {
 .nav__car__visible {
   left: 60%;
 }
+.nav__car__visible img {
+  transition: 2s;
+  transform: scale(1.2);
+}
 main h3 {
   margin: 40px;
   font-size: 26px;
@@ -163,6 +167,7 @@ main h3 {
   margin-right: 10px;
 }
 .car__product__image img {
+  margin: 5px;
   width: 100px;
   height: 100px;
 }
